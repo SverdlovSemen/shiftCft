@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="shiftCft:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/shiftCft_jar</output-path>
+    <root id="archive" name="shiftCft.jar">
+      <element id="module-output" name="shiftCft" />
+    </root>
+  </artifact>
+</component>
