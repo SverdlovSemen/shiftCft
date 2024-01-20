@@ -1,7 +1,6 @@
 package main.statistics;
 
-import com.sun.security.jgss.GSSUtil;
-import main.FilePathAndPrefixName;
+import main.file.FilePath;
 
 public class Statistics {
     private static ModeStatistics modeStatistics;
@@ -49,8 +48,35 @@ public class Statistics {
         }
     }
 
+    public static void processStatisticsOptions(String[] args){
+        for (int i = 0; i < args.length; i++) {
+            switch(args[i]){
+                case "-s":
+                    processShortStatistics(args, i);
+                    break;
+                case "-f":
+                    processFullStatistics(args, i);
+                    break;
+            }
+        }
+    }
+
+    private static void processShortStatistics(String[] args, int index){
+        if((index == 0 || (!args[index - 1].equals("-o") && !args[index - 1].equals("-p")))
+                && getModeStatistics() != ModeStatistics.FULL){
+
+            setModeStatistics(ModeStatistics.SHORT);
+        }
+    }
+
+    private static void processFullStatistics(String[] args, int index){
+        if(index == 0 || (!args[index-1].equals("-o") && !args[index-1].equals("-p"))){
+            setModeStatistics(ModeStatistics.FULL);
+        }
+    }
+
     public static void printToConsole(){
-        String prefixName = FilePathAndPrefixName.getPrefixNameFileResults();
+        String prefixName = FilePath.getPrefixNameFileResults();
         if(modeStatistics == ModeStatistics.SHORT){
             printShortStatistics(prefixName);
         } else if(modeStatistics == ModeStatistics.FULL){
